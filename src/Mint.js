@@ -32,7 +32,6 @@ function Mint(props) {
   const selectUri  = async (uri) => {
     setUriField(uri);
   }
-
   const changeAddressField  = async (event) => {
     setAddressField(event.target.value);
   }
@@ -41,7 +40,6 @@ function Mint(props) {
   }, [addressField, uriField]);
   const debouncedAddressField = useDebounce(addressField);
   const debouncedUriField = useDebounce(uriField)
-
   const {
     config:isConfig,
   } = usePrepareContractWrite({
@@ -80,7 +78,6 @@ function Mint(props) {
         alignItems: "center",
       }}
     >
-
       <div className="mint">
         <React.Fragment>
           <Container sx={{ py: 0 }} maxWidth="md">
@@ -91,7 +88,6 @@ function Mint(props) {
           <Avatar src={textBox.image} key={index} onClick={()=> selectUri(textBox.image)}  sx={{ width: 100, height: 100 }}/>
             ))
           }
-
           </Stack>
           <TextField
                 margin="normal"
@@ -125,8 +121,7 @@ function Mint(props) {
                 onClick={(e) =>{
                   e.preventDefault();
                   mint(e);
-                }
-                  
+                }               
                 }
               >
                 MINT

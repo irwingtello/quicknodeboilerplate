@@ -26,7 +26,6 @@ function Navbar(props) {
   const { connect, connectors, isLoading, pendingConnector } =useConnect()
   const { disconnect } = useDisconnect()
   const { chain } = useNetwork()
-
   const home = async () => {
     window.open('https://www.quicknode.com/', '_blank');
   }
@@ -42,8 +41,7 @@ function Navbar(props) {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}  color="secondary">
           <Link  onClick={home}>QuickNode</Link>
           </Typography>
-          {props.isConnected==true?
-          
+          {props.isConnected==true?    
           <React.Fragment>
                         <Link
               variant="button"
@@ -54,9 +52,7 @@ function Navbar(props) {
                     let explorer = props.chains.find(networkValue => chain.id === networkValue.id).blockExplorers.default.url.replace("type", "address").replace("valuex", address);
                     window.open(explorer,'_blank');
                   }
-                }
-				
-                  
+                }   
               }}
               sx={{ my: 1, mx: 1.5 }}
             >
@@ -65,7 +61,6 @@ function Navbar(props) {
                         <Link
               variant="button"
               color="secondary"
-
               sx={{ my: 1, mx: 1.5 }}
             >
               {
@@ -73,13 +68,9 @@ function Navbar(props) {
                     props.chains.find(chainx => chain.id === networkValue.id)
                   }
                     )
-                  
-
               }
             {chain ? props.chains.find(networkValue => chain.id === networkValue.id) ? "Connected to:" + chain.network : "Network not supported" : "Chain is undefined"}
             </Link>
-
-       
               <Button onClick={disconnect} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
               Disconnect
             </Button>
@@ -101,12 +92,10 @@ function Navbar(props) {
           ))}
             </React.Fragment>
           }
-          
-   
         </Toolbar>
       </AppBar>
       </ThemeProvider>
-
   );
 }
+
 export default Navbar;
