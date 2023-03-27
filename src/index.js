@@ -2,14 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import './index.css';
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import { InjectedConnector } from 'wagmi/connectors/injected'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { publicProvider } from 'wagmi/providers/public'
-import { Provider,createClient,configureChains,useAccount, useConnect, useDisconnect } from 'wagmi'
+import { createClient,configureChains } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
-import { Chain } from 'wagmi'
-import { useNetwork } from 'wagmi'
 import { WagmiConfig } from 'wagmi'
 import {hyperspaceTestnet,avalanche,avalancheFuji,polygon,polygonMumbai} from './Chain'
 import {

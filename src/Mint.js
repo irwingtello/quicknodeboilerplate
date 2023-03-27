@@ -1,11 +1,8 @@
-import Navbar from './Profile/Navbar';
-import React,{useEffect,useState,useMemo} from 'react';
-import { ethers } from 'ethers';
+import React,{useState,useMemo} from 'react';
 import {
   useAccount,
   usePrepareContractWrite,
   useContractWrite,
-  useWaitForTransaction,
   useNetwork
 } from "wagmi";
 import ABI from "./Contracts/MyToken.json";
@@ -25,7 +22,7 @@ function Mint(props) {
     { image:"https://nftstorage.link/ipfs/bafybeicx7pkobpcko425usyxdaxqk77pjszjywh44jtr6bq3d5the4cr3m/poh%20(5).jpg"  },
       {image:"https://nftstorage.link/ipfs/bafybeicx7pkobpcko425usyxdaxqk77pjszjywh44jtr6bq3d5the4cr3m/poh%20(3).jpg"}
   ]);
-  const { address, connector, isConnected } = useAccount()
+  const { isConnected } = useAccount()
   const { chain } = useNetwork()
   const [uriField, setUriField] = useState("");
   const [addressField, setAddressField] = useState("");
@@ -47,10 +44,6 @@ function Mint(props) {
 
   const {
     config:isConfig,
-    data: datax,
-    isSuccess: isSuccessPrepare,
-    error: prepareError,
-    isPrepareError: isPrepareError,
   } = usePrepareContractWrite({
     address:addressSmartContract(props.chains.find(networkValue => chain.id === networkValue.id).id),
     abi: ABI,
@@ -68,10 +61,7 @@ function Mint(props) {
       console.log("Settled", { data, error });
     },
   });
-  const { data:dataCW, error:errorCW, isError:isErrorCW, write:writeCW } = useContractWrite(isConfig);
-  const { isLoading:isLoadingWT, isSuccess:isSuccessWT } = useWaitForTransaction({
-    hash: dataCW?.hash,
-  });
+  const { data:dataCW,write:writeCW } = useContractWrite(isConfig);
   const mint = (e) => {
     e.preventDefault()
     writeCW?.();

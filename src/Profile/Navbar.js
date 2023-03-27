@@ -1,32 +1,16 @@
-import React, { useEffect, useState,useContext } from "react";
+import React from "react";
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import GlobalStyles from '@mui/material/GlobalStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import blue from '@mui/material/colors/blue';
-import { purple } from '@mui/material/colors';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { ethers, getDefaultAccount } from "ethers";
-import { BrowserRouter, Routes,Route, Switch } from 'react-router-dom';
 import {
   useAccount,
   useConnect,
   useDisconnect,
-  usePrepareContractWrite,
-  useNetwork, useSwitchNetwork
+  useNetwork
 } from 'wagmi'
-import { useNavigate } from 'react-router-dom';
 const theme = createTheme({
     palette: {
       primary: {
@@ -38,29 +22,11 @@ const theme = createTheme({
     },
   });
 function Navbar(props) {
-  const { ethereum } = window;
-  const { address, connector, isConnected } = useAccount()
-  const { connect, connectors, error, isLoading, pendingConnector } =useConnect()
+  const { address } = useAccount()
+  const { connect, connectors, isLoading, pendingConnector } =useConnect()
   const { disconnect } = useDisconnect()
   const { chain } = useNetwork()
-  // Create a stateful variable to store the network next to all the others
-  const [network, setNetwork] = useState('');
 
-
- 
-    const [defaultAccount, setDefaultAccount] = useState(null);
-  useEffect(() => {
-
-  }, [defaultAccount]);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const navigate = useNavigate();
   const home = async () => {
     window.open('https://www.quicknode.com/', '_blank');
   }
@@ -112,31 +78,7 @@ function Navbar(props) {
               }
             {chain ? props.chains.find(networkValue => chain.id === networkValue.id) ? "Connected to:" + chain.network : "Network not supported" : "Chain is undefined"}
             </Link>
-            {/*
-            <Button
-        id="basic-button"
-        variant="outlined"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        Dashboard
-      </Button>
-        */}
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        
-        <MenuItem >MINT</MenuItem>
-    
-      </Menu>
+
        
               <Button onClick={disconnect} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
               Disconnect

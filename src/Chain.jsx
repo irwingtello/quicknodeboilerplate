@@ -1,6 +1,4 @@
-import { Chain } from "wagmi";
-
-export const hyperspaceTestnet: Chain = {
+export const hyperspaceTestnet = {
     id: 314_1,
     name: 'Filecoin HyperSpace Testnet',
     network: 'hyperspace testnet',
